@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release;UAT;PROD</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dotnet-passbook" Version="3.2.4" />
+    <PackageReference Include="EPPlus" Version="5.5.4" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.20" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="7.19.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MMA.Documents.Domain\MMA.Documents.Domain.csproj" />
+    <ProjectReference Include="..\MMA.WebApi.DataAccess\MMA.WebApi.DataAccess.csproj" />
+    <ProjectReference Include="..\MMA.WebApi.Shared\MMA.WebApi.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
