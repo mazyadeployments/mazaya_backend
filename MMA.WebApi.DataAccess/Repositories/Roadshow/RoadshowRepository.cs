@@ -601,7 +601,8 @@ namespace MMA.WebApi.DataAccess.Repository.Offers
             QueryModel queryModel
         )
         {
-            var filteredRoadshowEvents = roadshowEvents.DistinctBy(r => r.RoadshowId);
+            string s = "";
+            var filteredRoadshowEvents = roadshowEvents.DistinctBy(r => r.RoadshowId, s);
             filteredRoadshowEvents = filteredRoadshowEvents
                 .Where(
                     roadshowEvent =>

@@ -104,6 +104,15 @@ namespace MMA.WebApi.DataAccess.Models
         //Logout Logic
         public virtual DbSet<ExpiredToken> ExpiredTokens { get; set; }
 
+        //Mazaya
+
+       public virtual DbSet<MazayaCategory> MazayaCategories { get; set; }
+        public virtual DbSet<MazayacategoryDocument> mazayacategoryDocument { get; set; }
+        public virtual DbSet<MazayaSubcategory> MazayaSubcategories { get; set; }
+       public virtual DbSet<MazayaPaymentgateway> MazayaPaymentgateways { get; set; }
+       public virtual DbSet<MazayaPackageSubscription> MazayaPackageSubscriptions { get; set; }
+       public virtual DbSet<Mazayacategorydetails> Mazayacategorydetails { get; set; } 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OfferImages>(e => e.ToView("OfferImages").HasNoKey());

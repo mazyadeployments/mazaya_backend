@@ -20,6 +20,10 @@ using MMA.WebApi.Shared.Interfaces.ExpiredToken;
 using MMA.WebApi.Shared.Interfaces.Image;
 using MMA.WebApi.Shared.Interfaces.LogAnalytics;
 using MMA.WebApi.Shared.Interfaces.MailStorage;
+using MMA.WebApi.Shared.Interfaces.MazayaCategory;
+using MMA.WebApi.Shared.Interfaces.MazayaPackageSubscriptions;
+using MMA.WebApi.Shared.Interfaces.MazayaPaymentgateway;
+using MMA.WebApi.Shared.Interfaces.MazayaSubCategory;
 using MMA.WebApi.Shared.Interfaces.Membership;
 using MMA.WebApi.Shared.Interfaces.OfferDocuments;
 using MMA.WebApi.Shared.Interfaces.OfferLocations;
@@ -98,6 +102,11 @@ namespace MMA.WebApi.Core.Bootstrap
             services.AddTransient<IOfferSuggestionsService, OfferSuggestionsService>();
             services.AddSingleton<IApplicationSettings, ApplicationSettings>();
             services.AddTransient<IAnnouncementService, AnnouncementService>();
+
+            services.AddTransient<IMazayaCategoryService, MazayaCategoryService>();
+            services.AddSingleton<IMazayaSubCategoryService, MazayaSubcategoryService>();
+            services.AddTransient<IMazayaPaymentgatewayService, MazayaPaymentgatewayService>();
+            services.AddTransient<IMazayaPackagesubscriptionsService, MazayaPackagesubscriptionsService>();
 
             services.AddDataAccess(config).WithMMADbContext(config.GetConnectionString("Database"));
         }

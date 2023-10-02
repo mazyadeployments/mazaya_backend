@@ -41,7 +41,8 @@ namespace MMA.WebApi
             var host = WebHost.CreateDefaultBuilder(args);
 
             host.UseNLog();
-
+           
+           
             //logger.Trace("Configure logging and azure inisghts");
 
             host.ConfigureLogging(loggerBuilder =>
@@ -70,12 +71,12 @@ namespace MMA.WebApi
 #if DEBUG
             //logger.Trace("Use kestrel for development");
 
-            host.UseKestrel(serverOptions =>
-            {
-                //serverOptions.Limits.MaxRequestBodySize = 1024 * 100;
-                serverOptions.ListenLocalhost(8080);
-                serverOptions.AddServerHeader = false;
-            });
+            //host.UseKestrel(serverOptions =>
+            //{
+            //    //serverOptions.Limits.MaxRequestBodySize = 1024 * 100;
+            //    serverOptions.ListenLocalhost(5000);
+            //    serverOptions.AddServerHeader = false;
+            //});
 #endif
             //logger.Trace("Setup root");
 

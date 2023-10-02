@@ -169,6 +169,7 @@ namespace MMA.WebApi
             _logger.LogInformation("Configuring services completed.");
 
             services.AddDataProtection().SetApplicationName("offers-app");
+            //services.AddAutoMapper();
 
             return provider;
         }

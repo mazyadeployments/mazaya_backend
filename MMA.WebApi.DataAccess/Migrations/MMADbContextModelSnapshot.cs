@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace MMA.WebApi.DataAccess.Migrations
 {
     [DbContext(typeof(MMADbContext))]
@@ -15,9 +17,116 @@ namespace MMA.WebApi.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.AcceptedDomain", b =>
                 {
@@ -36,8 +145,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
@@ -69,19 +179,20 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("InviteSent")
                         .HasColumnType("bit");
@@ -93,8 +204,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -111,8 +222,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("AllBuyers")
                         .HasColumnType("bit");
@@ -162,8 +274,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AnnouncementId")
                         .HasColumnType("int");
@@ -184,8 +297,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AnnouncementId")
                         .HasColumnType("int");
@@ -204,8 +318,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AnnouncementId")
                         .HasColumnType("int");
@@ -230,21 +345,21 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.ApplicationUser", b =>
@@ -272,8 +387,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -294,12 +409,12 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -334,8 +449,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<int>("UserType")
                         .HasColumnType("int");
@@ -343,31 +458,32 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("UserType");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.ApplicationUserDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -382,8 +498,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -425,8 +541,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -455,15 +572,16 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -478,8 +596,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -521,8 +639,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -560,15 +679,16 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CollectionId")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -583,8 +703,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -626,12 +746,13 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -653,8 +774,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ApproveStatus")
                         .HasColumnType("nvarchar(max)");
@@ -780,8 +902,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -815,12 +938,13 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -829,8 +953,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -846,8 +970,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -890,8 +1015,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -925,8 +1051,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -943,8 +1070,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -973,8 +1101,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("DiscountOrPrice")
                         .HasColumnType("nvarchar(max)");
@@ -1114,8 +1243,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("ExpiredAt")
                         .HasColumnType("datetime2");
@@ -1135,8 +1265,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1153,8 +1284,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1174,8 +1306,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<int>("ClickCount")
                         .HasColumnType("int");
@@ -1198,8 +1331,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1219,8 +1353,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("AnnouncementId")
                         .HasColumnType("int");
@@ -1279,8 +1414,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<Guid>("DocumentId")
                         .HasColumnType("uniqueidentifier");
@@ -1295,6 +1431,311 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasIndex("MailStorageId");
 
                     b.ToTable("MailStorageDocument");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("facilities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MazayaCategories");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Mazayacategorydetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MazayasubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("dob")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("firstname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("relation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MazayasubCategoryId");
+
+                    b.ToTable("Mazayacategorydetails");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayacategoryDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OriginalImageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("X1")
+                        .HasColumnType("float");
+
+                    b.Property<double>("X2")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Y1")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Y2")
+                        .HasColumnType("float");
+
+                    b.Property<double>("cropX1")
+                        .HasColumnType("float");
+
+                    b.Property<double>("cropX2")
+                        .HasColumnType("float");
+
+                    b.Property<double>("cropY1")
+                        .HasColumnType("float");
+
+                    b.Property<double>("cropY2")
+                        .HasColumnType("float");
+
+                    b.Property<int>("mazayaCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
+
+                    b.HasIndex("mazayaCategoryId");
+
+                    b.ToTable("mazayacategoryDocument");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaPackageSubscription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(28,12)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SubCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("SubCategoryId");
+
+                    b.ToTable("MazayaPackageSubscriptions");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaPaymentgateway", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(28,12)");
+
+                    b.Property<string>("Bankref")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cardname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cardno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cardtype")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Device")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Deviceid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PayDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Paystatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MazayaPaymentgateways");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaSubcategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(28,12)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MazayaCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NoofAdult")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoofChildren")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("currency")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("optiontype")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("totalcount")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("vat")
+                        .HasColumnType("decimal(28,12)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MazayaCategoryId");
+
+                    b.ToTable("MazayaSubcategories");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Membership", b =>
@@ -1326,8 +1767,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1422,8 +1864,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Data")
                         .HasColumnType("nvarchar(max)");
@@ -1437,8 +1880,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1464,8 +1908,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AboutCompany")
                         .HasColumnType("nvarchar(max)");
@@ -1504,16 +1949,16 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Discount")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<decimal?>("DiscountFrom")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<decimal?>("DiscountTo")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<decimal?>("DiscountedPrice")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<string>("E164Number")
                         .HasColumnType("nvarchar(max)");
@@ -1537,19 +1982,19 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("OriginalPrice")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<string>("PriceCustom")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("PriceFrom")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<string>("PriceList")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("PriceTo")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<string>("PromotionCode")
                         .HasColumnType("nvarchar(max)");
@@ -1631,15 +2076,16 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Cover")
                         .HasColumnType("bit");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1657,8 +2103,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -1700,8 +2146,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -1751,7 +2198,7 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -1773,8 +2220,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1810,12 +2258,34 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.ToTable("OfferReport");
                 });
 
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OffersMemberships", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MembershipId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("OfferId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MembershipId");
+
+                    b.HasIndex("OfferId");
+
+                    b.ToTable("OffersMemberships");
+                });
+
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferSuggestion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1860,33 +2330,13 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.ToTable("OfferTag");
                 });
 
-            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OffersMemberships", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("MembershipId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("OfferId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MembershipId");
-
-                    b.HasIndex("OfferId");
-
-                    b.ToTable("OffersMemberships");
-                });
-
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RedeemOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -1915,8 +2365,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Refreshtoken")
                         .HasColumnType("nvarchar(max)");
@@ -1936,8 +2387,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Activities")
                         .HasColumnType("nvarchar(max)");
@@ -1949,8 +2401,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -1995,8 +2447,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -2014,12 +2466,13 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("CreatedByName")
                         .HasColumnType("nvarchar(max)");
@@ -2044,8 +2497,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateFrom")
                         .HasColumnType("datetime2");
@@ -2087,8 +2541,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -2124,8 +2579,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("DefaultLocationId")
                         .HasColumnType("int");
@@ -2146,8 +2602,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -2223,15 +2680,16 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Cover")
                         .HasColumnType("bit");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -2249,8 +2707,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -2306,7 +2764,7 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Rating")
-                        .HasColumnType("decimal(28, 12)");
+                        .HasColumnType("decimal(28,12)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -2343,8 +2801,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int?>("CompanyId")
                         .HasColumnType("int");
@@ -2408,8 +2867,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
@@ -2467,8 +2927,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AdminId")
                         .HasColumnType("nvarchar(450)");
@@ -2538,8 +2999,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
@@ -2571,12 +3033,13 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -2591,12 +3054,12 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -2711,8 +3174,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("DomainName")
                         .HasColumnType("nvarchar(max)");
@@ -2848,8 +3312,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
@@ -2885,8 +3350,9 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Acknowledged")
                         .HasColumnType("bit");
@@ -2931,19 +3397,37 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.ToTable("UserNotification");
                 });
 
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Views.OfferImages", b =>
+                {
+                    b.Property<bool>("Cover")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ImageType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OfferId")
+                        .HasColumnType("int");
+
+                    b.ToView("OfferImages");
+                });
+
             modelBuilder.Entity("MMA.WebApi.DataAccess.RoadshowDocument", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<bool>("Cover")
                         .HasColumnType("bit");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -2961,8 +3445,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -3004,12 +3488,13 @@ namespace MMA.WebApi.DataAccess.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -3027,8 +3512,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("datetime2");
@@ -3044,106 +3529,53 @@ namespace MMA.WebApi.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.AnnouncementAttachments", b =>
@@ -3159,6 +3591,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Announcement");
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.AnnouncementSpecificBuyer", b =>
@@ -3168,6 +3604,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Announcement");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.AnnouncementSpecificSupplier", b =>
@@ -3177,6 +3615,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("AnnouncementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Announcement");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.ApplicationUser", b =>
@@ -3186,6 +3626,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("UserType")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("UserDomain");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.ApplicationUserDocument", b =>
@@ -3199,6 +3641,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.CategoryDocument", b =>
@@ -3214,6 +3658,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.CollectionDocument", b =>
@@ -3229,6 +3675,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Comment", b =>
@@ -3249,6 +3697,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.Document", "TradeLicence")
                         .WithMany()
                         .HasForeignKey("TradeLicenceId");
+
+                    b.Navigation("Logo");
+
+                    b.Navigation("TradeLicence");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.CompanyActivity", b =>
@@ -3273,6 +3725,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.CompanyDocument", b =>
@@ -3282,6 +3738,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.CompanyLocation", b =>
@@ -3291,6 +3749,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.CompanyPartner", b =>
@@ -3315,6 +3775,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Document", b =>
@@ -3322,6 +3786,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.Document", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MailStorage", b =>
@@ -3337,6 +3803,12 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "AspNetUser")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Announcement");
+
+                    b.Navigation("AspNetUser");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MailStorageDocument", b =>
@@ -3352,6 +3824,64 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("MailStorageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Mazayacategorydetails", b =>
+                {
+                    b.HasOne("MMA.WebApi.DataAccess.Models.MazayaSubcategory", "MazayasubCategory")
+                        .WithMany()
+                        .HasForeignKey("MazayasubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MazayasubCategory");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayacategoryDocument", b =>
+                {
+                    b.HasOne("MMA.WebApi.DataAccess.Models.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MMA.WebApi.DataAccess.Models.MazayaCategory", null)
+                        .WithMany("mazayaCategoryDocuments")
+                        .HasForeignKey("mazayaCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaPackageSubscription", b =>
+                {
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("MMA.WebApi.DataAccess.Models.MazayaSubcategory", "MazayaSubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MazayaSubCategory");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaSubcategory", b =>
+                {
+                    b.HasOne("MMA.WebApi.DataAccess.Models.MazayaCategory", "MazayaCategory")
+                        .WithMany()
+                        .HasForeignKey("MazayaCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MazayaCategory");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Membership", b =>
@@ -3361,6 +3891,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("PictureDataId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("PictureData");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MembershipECard", b =>
@@ -3372,6 +3904,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
+
+                    b.Navigation("Membership");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Offer", b =>
@@ -3381,6 +3917,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferCategory", b =>
@@ -3396,6 +3934,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferCollection", b =>
@@ -3411,6 +3953,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Collection");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferDocument", b =>
@@ -3426,6 +3972,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferLocation", b =>
@@ -3441,6 +3989,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DefaultArea");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferRating", b =>
@@ -3456,6 +4006,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferReport", b =>
@@ -3465,28 +4019,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferSuggestion", b =>
-                {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferTag", b =>
-                {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.Offer", "Offer")
-                        .WithMany("OfferTags")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MMA.WebApi.DataAccess.Models.Tag", "Tag")
-                        .WithMany("OfferTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OffersMemberships", b =>
@@ -3502,6 +4036,38 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Membership");
+
+                    b.Navigation("Offer");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferSuggestion", b =>
+                {
+                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Buyer");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.OfferTag", b =>
+                {
+                    b.HasOne("MMA.WebApi.DataAccess.Models.Offer", "Offer")
+                        .WithMany("OfferTags")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MMA.WebApi.DataAccess.Models.Tag", "Tag")
+                        .WithMany("OfferTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Offer");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Roadshow", b =>
@@ -3513,6 +4079,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.Document", "EmiratesIdDocument")
                         .WithMany()
                         .HasForeignKey("EmiratesId");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("EmiratesIdDocument");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowComment", b =>
@@ -3535,6 +4105,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowInviteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DefaultLocation");
+
+                    b.Navigation("RoadshowInvite");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowEventOffer", b =>
@@ -3550,6 +4124,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("RoadshowEvent");
+
+                    b.Navigation("RoadshowOffer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowInvite", b =>
@@ -3565,6 +4143,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Roadshow");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowLocation", b =>
@@ -3580,6 +4162,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DefaultLocation");
+
+                    b.Navigation("Roadshow");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOffer", b =>
@@ -3589,6 +4175,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowProposalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("RoadshowProposal");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOfferCategory", b =>
@@ -3604,6 +4192,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("RoadshowOffer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOfferCollection", b =>
@@ -3619,6 +4211,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Collection");
+
+                    b.Navigation("RoadshowOffer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOfferDocument", b =>
@@ -3634,6 +4230,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOfferRating", b =>
@@ -3649,6 +4247,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("RoadshowOffer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOfferTag", b =>
@@ -3664,6 +4266,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("RoadshowOffer");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowProposal", b =>
@@ -3671,6 +4277,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowVoucher", b =>
@@ -3693,6 +4301,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "AspNetUser")
                         .WithMany()
                         .HasForeignKey("AdminId");
+
+                    b.Navigation("AspNetUser");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.UserFavouritesOffer", b =>
@@ -3708,6 +4318,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.UserFavouritesRoadshowOffer", b =>
@@ -3723,6 +4337,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowOfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("RoadshowOffer");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.UserFcmToken", b =>
@@ -3732,6 +4350,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.UserInvitations", b =>
@@ -3745,6 +4365,10 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("UserType")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("UserDomain");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.Models.UserNotification", b =>
@@ -3752,6 +4376,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", "AspNetUser")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("AspNetUser");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.RoadshowDocument", b =>
@@ -3767,6 +4393,8 @@ namespace MMA.WebApi.DataAccess.Migrations
                         .HasForeignKey("RoadshowId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MMA.WebApi.DataAccess.RoadshowOfferProposalDocument", b =>
@@ -3780,57 +4408,143 @@ namespace MMA.WebApi.DataAccess.Migrations
                     b.HasOne("MMA.WebApi.DataAccess.Models.RoadshowProposal", null)
                         .WithMany("Documents")
                         .HasForeignKey("RoadshowProposalId");
+
+                    b.Navigation("Document");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Announcement", b =>
                 {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Attachments");
+
+                    b.Navigation("SpecificBuyersCollection");
+
+                    b.Navigation("SpecificSuppliersCollection");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ApplicationUserDocuments");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Category", b =>
                 {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("CategoryDocuments");
+
+                    b.Navigation("OfferCategories");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Collection", b =>
                 {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("CollectionDocuments");
 
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("OfferCollections");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Company", b =>
                 {
-                    b.HasOne("MMA.WebApi.DataAccess.Models.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("CompanyActivities");
+
+                    b.Navigation("CompanyCategories");
+
+                    b.Navigation("CompanyLocations");
+
+                    b.Navigation("CompanyPartners");
+
+                    b.Navigation("CompanySuppliers");
+
+                    b.Navigation("Offers");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Document", b =>
+                {
+                    b.Navigation("OfferDocuments");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MailStorage", b =>
+                {
+                    b.Navigation("MailStorageDocuments");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.MazayaCategory", b =>
+                {
+                    b.Navigation("mazayaCategoryDocuments");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Offer", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Memberships");
+
+                    b.Navigation("OfferCategories");
+
+                    b.Navigation("OfferCollections");
+
+                    b.Navigation("OfferDocuments");
+
+                    b.Navigation("OfferLocations");
+
+                    b.Navigation("OfferRating");
+
+                    b.Navigation("OfferTags");
+
+                    b.Navigation("UserFavouritesOffers");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Roadshow", b =>
+                {
+                    b.Navigation("Documents");
+
+                    b.Navigation("Locations");
+
+                    b.Navigation("RoadshowComments");
+
+                    b.Navigation("RoadshowInvites");
+
+                    b.Navigation("RoadshowVouchers");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowEvent", b =>
+                {
+                    b.Navigation("RoadshowEventOffers");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowInvite", b =>
+                {
+                    b.Navigation("RoadshowEvents");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowOffer", b =>
+                {
+                    b.Navigation("OfferDocuments");
+
+                    b.Navigation("OfferRating");
+
+                    b.Navigation("RoadshowEventOffers");
+
+                    b.Navigation("RoadshowOfferCategories");
+
+                    b.Navigation("RoadshowOfferCollections");
+
+                    b.Navigation("RoadshowOfferTags");
+
+                    b.Navigation("RoadshowVouchers");
+
+                    b.Navigation("UserFavouritesRoadshowOffers");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.RoadshowProposal", b =>
+                {
+                    b.Navigation("Documents");
+
+                    b.Navigation("RoadshowOffers");
+
+                    b.Navigation("RoadshowVouchers");
+                });
+
+            modelBuilder.Entity("MMA.WebApi.DataAccess.Models.Tag", b =>
+                {
+                    b.Navigation("OfferTags");
                 });
 #pragma warning restore 612, 618
         }

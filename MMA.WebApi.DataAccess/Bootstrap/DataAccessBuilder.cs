@@ -16,6 +16,10 @@ using MMA.WebApi.DataAccess.Repositories.Dashboard;
 using MMA.WebApi.DataAccess.Repositories.ExpiredToken;
 using MMA.WebApi.DataAccess.Repositories.Log;
 using MMA.WebApi.DataAccess.Repositories.LogAnalytics;
+using MMA.WebApi.DataAccess.Repositories.MazayaCategory;
+using MMA.WebApi.DataAccess.Repositories.MazayaPackagesubscriptions;
+using MMA.WebApi.DataAccess.Repositories.MazayaPaymentgateway;
+using MMA.WebApi.DataAccess.Repositories.Mazayasubcategory;
 using MMA.WebApi.DataAccess.Repositories.Membership;
 using MMA.WebApi.DataAccess.Repositories.OfferRatings;
 using MMA.WebApi.DataAccess.Repositories.OfferReports;
@@ -45,6 +49,10 @@ using MMA.WebApi.Shared.Interfaces.EmailTemplate;
 using MMA.WebApi.Shared.Interfaces.ExpiredToken;
 using MMA.WebApi.Shared.Interfaces.Logger;
 using MMA.WebApi.Shared.Interfaces.MailStorage;
+using MMA.WebApi.Shared.Interfaces.MazayaCategory;
+using MMA.WebApi.Shared.Interfaces.MazayaPackageSubscriptions;
+using MMA.WebApi.Shared.Interfaces.MazayaPaymentgateway;
+using MMA.WebApi.Shared.Interfaces.MazayaSubCategory;
 using MMA.WebApi.Shared.Interfaces.Membership;
 using MMA.WebApi.Shared.Interfaces.OfferDocuments;
 using MMA.WebApi.Shared.Interfaces.OfferLocations;
@@ -115,6 +123,11 @@ namespace MMA.WebApi.DataAccess.Bootstrap
             _services.AddTransient<ILogAnalyticsRepository, LogAnalyticsRepository>();
             _services.AddTransient<IOfferSuggestionsRepository, OfferSuggestionsRepository>();
             _services.AddTransient<IAnnouncementRepository, AnnouncementRepository>();
+
+            _services.AddTransient<IMazayaCategoryRepository, MazayaCategoryRepository>();
+            _services.AddTransient<IMazayaSubcategoryRepository, MazayasubcategoryRepository>();
+            _services.AddTransient<IMazayaPaymentgatewayRepository, MazayaPaymentgatewayRepository>();
+            _services.AddTransient<IMazayaPackagesubscriptionsRepository, MazayapackagesubscriptionsRepository>();
 
             _services.AddDbContext<MMADbContext>(
                 builder =>
