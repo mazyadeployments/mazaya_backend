@@ -1,0 +1,800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GetAllMeetings" xml:space="preserve">
+    <value>select distinct meeting.Id as Id, 
+meeting.Name as Name,
+	meeting.MeetingNo as MeetingNo,
+	meeting.Venue as Venue,
+	meeting.[Date] as [Date],
+	meeting.StartTime as StartTime,
+	meeting.EndTime as EndTime,
+	meeting.StatusId as StatusId,
+	meeting.StatusName as StatusName
+	from 
+(select distinct m.Id as Id, 
+m.Name as Name,
+	m.MeetingNo as MeetingNo,
+	m.Venue as Venue,
+	m.[Date] as [Date],
+	m.StartTime as StartTime,
+	m.EndTime as EndTime,
+	ms.[Name] as StatusName,
+	m.TypeId as TypeId,
+	m.StatusId as StatusId
+	from Meeting m
+	left join MeetingStatus ms on m.StatusId = ms.Id
+	inner join vwUserProfilePermissions upp on 
+	(( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId ='module_bc_meeting'
+	or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ac_meeting'
+	or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ic_meeting' 
+	or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_tc_meeting') and upp.AccountDataId = @userId) meeting</value>
+  </data>
+  <data name="GetAssignedMeetings" xml:space="preserve">
+    <value>select distinct
+meeting.Id as Id,
+meeting.Name as Name, 
+meeting.MeetingNo as MeetingNo,
+meeting.Venue as Venue,
+meeting.[Date] as [Date],
+meeting.StartTime as StartTime,
+meeting.EndTime as EndTime,
+meeting.StatusId as StatusId,
+meeting.StatusName as StatusName
+from
+(select 
+m.Id as Id, 
+m.Name as Name,
+m.MeetingNo as MeetingNo,
+m.Venue as Venue,
+m.[Date] as [Date],
+m.StartTime as StartTime,
+m.EndTime as EndTime,
+m.StatusId as StatusId,
+ms.[Name] as StatusName,
+m.TypeId
+from
+Meeting m 
+inner join MeetingAssignment ma on m.Id = ma.MeetingId
+left join MeetingStatus ms on m.StatusId = ms.Id
+inner join vwUserProfilePermissions upp on ma.UserProfileId = upp.ProfileId and
+(( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_bc_meeting'
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ac_meeting'
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ic_meeting' 
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_tc_meeting') and upp.AccountDataId = @userId)
+--inner join UserProfile up on ma.UserProfileId = up.Id and up.Active = 1
+--inner join dbo.[User] u on u.Id = up.UserId and u.AccountDataId = @userId
+
+--union
+
+--select 
+--m.Id as Id, 
+--m.MeetingNo as MeetingNo,
+--m.Venue as Venue,
+--m.[Date] as [Date],
+--m.StartTime as StartTime,
+--m.EndTime as EndTime,
+--ms.[Name] as StatusName,
+--m.GroupId
+--from
+--Meeting m 
+--inner join MeetingAssignment ma on m.Id = ma.MeetingId
+--left join MeetingStatus ms on m.StatusId = ms.Id
+--inner join UserProfile up on ma.UserProfileId = up.Id and up.Active = 1 
+--inner join UserDelegation del  on del.DelegateId = up.UserId and del.Active = 1  and 
+--(CONVERT(date, del.DelegateFromDate) &lt;= CONVERT(date, GETDATE()) and 
+--(CONVERT(date, del.DelegateToDate) &gt;= CONVERT(date, GETDATE())))
+--inner join dbo.[User] u on u.Id = up.UserId and u.AccountDataId = @userId) 
+meeting</value>
+  </data>
+  <data name="GetAllUsers" xml:space="preserve">
+    <value>select u.Id as Id,
+u.FullName as FullName,
+r.[Name] as RoleName,
+u.Active as Status,
+u.Designation as Designation,
+u.AccountDataId as AccountDataId
+from [User] u
+left join UserProfile up on u.Id = up.UserId
+left join AspNetRoles r on up.RoleId = r.Id</value>
+  </data>
+  <data name="GetAllUserProfiles" xml:space="preserve">
+    <value>select distinct p.Id as Id,
+pr.Name as RoleName,
+p.Active as StatusId,
+u.AccountDataId as AccountDataId,
+c.Name as CompanyName
+from UserProfile p
+left join AspNetRoles pr on p.RoleId = pr.Id
+left join [User] u on p.UserId = u.Id
+left join Company c on p.CompanyId = c.Id
+left join UserProfileUnit upu on p.Id = upu.UserProfileId
+left join Unit un on upu.UnitId = un.Id
+where u.AccountDataId = @userId</value>
+  </data>
+  <data name="GetAgendaItemAssignment" xml:space="preserve">
+    <value>select distinct 
+	agendaItem.Id,
+	agendaItem.MeetingId,
+	agendaItem.Title as Title,
+	agendaItem.MeetingNo as MeetingNo,
+	agendaItem.TypeId,
+	agendaItem.StatusName,
+	agendaItem.CreatedOn,
+	agendaItem.Comment as Comment,
+	agendaItem.MeetingUrgency,
+	agendaItem.AgendaItemTypeId,
+	agendaItem.ParentId,
+	agendaItem.ItemType,
+	agendaItem.UpdatedOn
+	from
+(select  distinct
+	ai.Id as Id,
+	me.Id as MeetingId,
+	ai.Title as Title,
+	me.MeetingNo as MeetingNo,
+	me.TypeId,
+	ais.[Name] as StatusName,
+	ai.CreatedOn as CreatedOn,
+	ai.Comment as Comment,
+	mu.Name as MeetingUrgency,
+	at.Id as AgendaItemTypeId,
+	ai.ParentId as ParentId,
+	at.Flag as ItemType,
+	un.Name as UnitName,
+	ai.UpdatedOn
+from AgendaItem ai
+left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId
+left join  Unit un on un.Id = aiu.UnitId
+inner join AgendaItemAssignment aia on ai.Id = aia.AgendaItemId
+left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+left join Meeting me on me.Id = ma.MeetingId  
+left join MeetingUrgency mu on mu.Id = me.UrgencyId
+left join MeetingType mt on me.TypeId = mt.id
+left join AgendaItemStatus ais on ai.StatusId = ais.Id
+inner join AgendaItemType at on at.Id = ai.TypeId  and ai.TypeId not in (1,2,6,7)
+
+inner join vwUserProfilePermissions upp on upp.ProfileId = aia.UserProfileId and
+(upp.UnitId = aiu.UnitId or  upp.UnitId is null)  and upp.PermissionId = 'module_agenda_items' and 
+( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+and upp.AccountDataId = @userId
+
+--union
+
+--select distinct
+--	ai.Id as Id,
+--	me.Id as MeetingId,
+--	ai.Title as Title,
+--	me.MeetingNo as MeetingNo,
+--	me.GroupId,
+--	mg.Name as MeetingGroupName,
+--	ais.[Name] as StatusName,
+--	ai.CreatedOn as CreatedOn,
+--	ai.Comment as Comment,
+--	mt.Name as MeetingType,
+--	at.Id as AgendaItemTypeId,
+--	ai.ParentId as ParentId,
+--	at.Flag as ItemType,
+--	un.Name as UnitName
+--from AgendaItem ai
+--left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId
+--left join  Unit un on un.Id = aiu.UnitId
+--inner join AgendaItemAssignment aia on ai.Id = aia.AgendaItemId 
+--inner join UserProfile up on aia.UserProfileId = up.Id and up.Active = 1 
+--inner join UserDelegation del  on del.DelegateId = up.UserId and del.Active = 1  and 
+--(CONVERT(date, del.DelegateFromDate) &lt;= CONVERT(date, GETDATE()) and 
+--(CONVERT(date, del.DelegateToDate) &gt;= CONVERT(date, GETDATE())))
+--inner join dbo.[User] u on u.Id = up.UserId and u.AccountDataId = 'bcsecretary'
+--left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+--left join Meeting me on me.Id = ma.MeetingId  left join MeetingType mt on mt.Id = me.TypeId
+--left join MeetingGroup mg on me.GroupId = mg.id
+--left join AgendaItemStatus ais on ai.StatusId = ais.Id
+--left join AgendaItemType at on at.Id = ai.TypeId
+) agendaItem</value>
+  </data>
+  <data name="GetAgendaItemUnit" xml:space="preserve">
+    <value>select ai.Id as Id,
+ai.MeetingId as MeetingId,
+ai.Title as Title,
+me.MeetingNo as MeetingNo,
+ais.[Name] as StatusName,
+ai.CreatedOn as CreatedOn,
+mu.Name as MeetingUrgency,
+at.Flag as ItemType,
+un.Name as UnitName
+from AgendaItem ai
+left join AgendaItemUnit aid on aid.AgendaItemId = ai.Id
+left join AgendaItemStatus ais on ai.StatusId = ais.Id
+left join UserProfile up on up.UnitId = aid.UnitId and up.RoleId = 'Contributor'
+left join [User] us on us.Id = up.UserId
+left join Meeting me on me.Id = ai.MeetingId
+left join MeetingUrgency mu on mu.Id = me.UrgencyId
+left join AgendaItemType at on at.Id = ai.TypeId
+left join Unit un on un.Id = aid.UnitId
+where up.UserId = us.Id</value>
+  </data>
+  <data name="GetAllActions" xml:space="preserve">
+    <value>select distinct a.Id as Id,
+	a.[Name] as Name,
+	a.Description as Description,
+	m.MeetingNo as MeetingNo,
+	mt.[Name] as MeetingType,
+	s.[Name] as StatusName,
+	convert(nvarchar(15), a.DueDate, 104) as DueDateFormatted,
+	a.DueDate as DueDate
+	from AgendaItemAction a
+	left join 
+	(select distinct ai.Id as Id
+		from 
+		AgendaItem ai 
+		left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+		left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+		left join Meeting m on m.Id = ma.MeetingId  
+		inner join vwUserProfilePermissions upp on 
+		upp.UnitId = aiu.UnitId or  upp.UnitId is null 
+		and upp.PermissionId = 'module_agenda_items'  
+		and ( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+		and upp.AccountDataId = @userId
+	)
+	agendaItem on  agendaItem.Id = a.AgendaItemId
+	left join AgendaItem ai on ai.id=agendaItem.Id
+	left join MeetingAgenda ma on ma.AgendaItemId = agendaItem.Id
+	left join Meeting m on ma.MeetingId = m.Id
+	left join MeetingType mt on m.TypeId = mt.id
+	left join AgendaItemActionStatus s on a.StatusId = s.Id
+	left join WorkflowInst wi on a.WorkflowInstId = wi.Id
+	left join Workflow w on wi.WorkflowId = w.Id
+	inner join vwUserProfilePermissions upp on 
+	upp.PermissionId = 'module_actions'  
+	and ( upp.ProfileCompanyId = a.CompanyId or upp.ProfileCompanyId is null)
+	and upp.AccountDataId =  @userId</value>
+  </data>
+  <data name="GetAssignedMeetingIds" xml:space="preserve">
+    <value>select distinct meeting.Id as Id
+from
+(select 
+m.Id as Id,
+m.TypeId
+from
+Meeting m 
+inner join MeetingAssignment ma on m.Id = ma.MeetingId
+left join MeetingStatus ms on m.StatusId = ms.Id
+inner join vwUserProfilePermissions upp on ma.UserProfileId = upp.ProfileId and
+(( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_bc_meeting'
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ac_meeting'
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ic_meeting' 
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_tc_meeting') and upp.AccountDataId = @userId) meeting</value>
+  </data>
+  <data name="GetAssignedActions" xml:space="preserve">
+    <value>select a.Id as Id,
+	a.[Name] as Name,
+	a.Description as Description,
+	m.MeetingNo as MeetingNo,
+	mt.[Name] as MeetingType,
+	s.[Name] as StatusName,
+	convert(nvarchar(15), a.DueDate, 104) as DueDateFormatted,
+	a.DueDate as DueDate
+	from AgendaItemAction a
+	left join AgendaItemActionAssignment aia on a.Id = aia.AgendaItemActionId
+	left join UserProfile up on aia.UserProfileId = up.Id
+	left join [User]u on up.UserId = u.Id
+	left join AgendaItem ai on a.AgendaItemId = ai.Id
+	left join MeetingAgenda ma on ma.AgendaItemId = ai.Id
+	left join Meeting m on ma.MeetingId = m.Id
+	left join MeetingType mt on m.TypeId = mt.id
+	left join AgendaItemActionStatus s on a.StatusId = s.Id
+	where u.AccountDataId = @userId</value>
+  </data>
+  <data name="GetAssignedActionIds" xml:space="preserve">
+    <value>select a.Id
+from AgendaItemAction a
+left join AgendaItemActionAssignment aia on a.Id = aia.AgendaItemActionId
+left join UserProfile up on aia.UserProfileId = up.Id
+left join [User] u on up.UserId = u.Id
+left join AgendaItemActionStatus ms on a.StatusId = ms.Id
+where u.AccountDataId = @userId</value>
+  </data>
+  <data name="GetAgendaItemActions" xml:space="preserve">
+    <value>select 
+ aia.Id as Id,
+ aia.Name as Name,
+ aia.Description as Description,
+ u.FullName as AssignTo,
+ u.Designation as Designation,
+ aia.DueDate as DueDate,
+aias.Name as StatusName,
+aia.AgendaItemId as AgendaItemId
+ from AgendaItemAction aia 
+ inner join AgendaItemActionAssignment aiaa on aia.Id = aiaa.AgendaItemActionId
+ inner join AgendaItemActionStatus aias on aia.StatusId = aias.Id
+ inner join UserProfile up on aiaa.UserProfileId = up.Id
+ inner join dbo.[User] u on up.UserId = u.Id</value>
+  </data>
+  <data name="GetResponsibilities" xml:space="preserve">
+    <value>select u.Name, aiu.AgendaItemId from AgendaItemUnit aiu 
+inner join Unit u on aiu.UnitId = u.Id</value>
+  </data>
+  <data name="GetMeetingTimeline" xml:space="preserve">
+    <value>SELECT m.Id as MeetingId
+      ,m.WorkflowInstId as WorkflowInstId
+      ,m.TypeId
+	  ,wis.Id as StepId
+	  ,wis.Title as Action
+	  ,wis.Completed as Status
+	  ,wis.CompletedOn as ActualDate
+	  ,wis.TargetDate as TargetDate
+	  ,CONVERT(nvarchar(15), wis.CompletedOn, 103) as ActualDateFormatted
+	  ,CONVERT(nvarchar(15), wis.TargetDate, 103) as TargetDateFormatted
+	  ,wia.Id as ActionId
+	  ,anr.Name as Responsibility
+FROM Meeting m
+LEFT JOIN WorkflowInstStep wis on m.WorkflowInstId = wis.WorkflowInstId
+LEFT JOIN WorkflowInstAction wia on wis.Id = wia.StepId
+LEFT JOIN AspNetRoles anr on wia.RoleId = anr.Id
+WHERE m.Id = @id</value>
+  </data>
+  <data name="GetAgendaItemPermissions" xml:space="preserve">
+    <value>select distinct rp.PermissionId from 
+RolePermission rp
+inner join UserProfile up on up.RoleId = rp.RoleId
+left join UserProfileUnit upu on up.Id = upu.UserProfileId
+left join AgendaItemUnit aiu on upu.UnitId = aiu.UnitId
+inner join dbo.[User] u on u.Id = up.UserId
+where u.AccountDataId = @userId and 
+ISNULL(aiu.AgendaItemId, @agendaItemId) = @agendaItemId and up.Active = 1</value>
+  </data>
+  <data name="GetGlobalPermissions" xml:space="preserve">
+    <value>select distinct p.PermissionId from vwUserProfilePermissions p where p.AccountDataId = @userId</value>
+  </data>
+  <data name="IsAgendaItemActionAssigned" xml:space="preserve">
+    <value>select CAST(COUNT(*) AS bit) from AgendaItemActionAssignment aia
+inner join UserProfile up on aia.UserProfileId = up.Id
+inner join dbo.[User] u on up.UserId =  u.Id
+where u.AccountDataId = @userId AND aia.AgendaItemActionId = @entityId</value>
+  </data>
+  <data name="IsAgendaItemAssigned" xml:space="preserve">
+    <value>select CAST(COUNT(*) AS bit) from AgendaItemAssignment aia
+inner join UserProfile up on aia.UserProfileId = up.Id
+inner join dbo.[User] u on up.UserId =  u.Id
+where u.AccountDataId = @userId AND aia.AgendaItemId = @entityId</value>
+  </data>
+  <data name="IsMeetingAssigned" xml:space="preserve">
+    <value>select CAST(COUNT(*) AS bit) from MeetingAssignment ms
+inner join UserProfile up on ms.UserProfileId = up.Id
+inner join dbo.[User] u on up.UserId =  u.Id
+where u.AccountDataId = @userId AND ms.MeetingId = @entityId</value>
+  </data>
+  <data name="GetAllMeetingsCount" xml:space="preserve">
+    <value>select  COUNT( distinct m.Id) 
+	from Meeting m
+	left join MeetingStatus ms on m.StatusId = ms.Id
+	inner join vwUserProfilePermissions upp on 
+	(( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_bc_meeting'
+	or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ac_meeting'
+	or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ic_meeting' 
+	or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_tc_meeting') and upp.AccountDataId = @userId</value>
+  </data>
+  <data name="GetAssignedMeetingsCount" xml:space="preserve">
+    <value>select COUNT(distinct meeting.Id)
+from
+(select 
+m.Id as Id
+from
+Meeting m 
+inner join MeetingAssignment ma on m.Id = ma.MeetingId
+left join MeetingStatus ms on m.StatusId = ms.Id
+inner join vwUserProfilePermissions upp on ma.UserProfileId = upp.ProfileId and
+(( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_bc_meeting'
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ac_meeting'
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_ic_meeting' 
+or ( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = 'module_tc_meeting') and upp.AccountDataId = @userId)
+
+--union
+
+--select 
+--m.Id as Id
+--from
+--Meeting m 
+--inner join MeetingAssignment ma on m.Id = ma.MeetingId
+--left join MeetingStatus ms on m.StatusId = ms.Id
+--inner join UserProfile up on ma.UserProfileId = up.Id and up.Active = 1 
+--inner join UserDelegation del  on del.DelegateId = up.UserId and del.Active = 1  and 
+--(CONVERT(date, del.DelegateFromDate) &lt;= CONVERT(date, GETDATE()) and 
+--(CONVERT(date, del.DelegateToDate) &gt;= CONVERT(date, GETDATE())))
+--inner join dbo.[User] u on u.Id = up.UserId and u.AccountDataId = @userId) 
+meeting</value>
+  </data>
+  <data name="AgendaItemIds" xml:space="preserve">
+    <value>select distinct ai.Id
+		from 
+		(select  ai.*,  aiu.UnitId as UnitId from AgendaItem ai 
+		inner join AgendaItemVisibility aiv on ai.Id = aiv.AgendaItemId
+		inner join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+		inner join UserProfileUnit upu on upu.UnitId = aiv.UnitId
+		inner join UserProfile up on up.Id = upu.UserProfileId
+		inner join dbo.[User] u on u.Id = up.UserId
+		where u.AccountDataId = @userId and aiv.UserId is null
+	
+		union 
+		
+		select  ai.*, aiu.UnitId as UnitId from AgendaItem ai 
+		inner join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId
+		inner join AgendaItemVisibility aiv on aiv.UnitId = aiu.UnitId
+		inner join UserProfile up on aiv.UserId = up.UserId
+		inner join dbo.[User] u on u.Id = up.UserId
+		where u.AccountDataId = @userId and aiv.AgendaItemId is null
+
+		union
+
+		select  ai.*, aiu.UnitId as UnitId from AgendaItem ai 
+		inner join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId
+		inner join  Unit un on un.Id = aiu.UnitId
+		inner join AgendaItemVisibility aiv on aiv.AgendaItemId = ai.Id
+		inner join dbo.[User] u on u.Id = aiv.UserId
+		where u.AccountDataId = @userId and aiv.UnitId is null) as ai</value>
+  </data>
+  <data name="GetAllActionsCount" xml:space="preserve">
+    <value>select COUNT(distinct a.Id) 
+	from AgendaItemAction a
+	left join 
+	(select distinct ai.Id as Id
+		from 
+		AgendaItem ai 
+		left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+		left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+		left join Meeting m on m.Id = ma.MeetingId  
+		inner join vwUserProfilePermissions upp on 
+		upp.UnitId = aiu.UnitId or  upp.UnitId is null 
+		and upp.PermissionId = 'module_agenda_items'  
+		and ( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+		and upp.AccountDataId = @userId
+	)
+	agendaItem on  agendaItem.Id = a.AgendaItemId
+	left join AgendaItem ai on ai.id=agendaItem.Id
+	left join MeetingAgenda ma on ma.AgendaItemId = agendaItem.Id
+	left join Meeting m on ma.MeetingId = m.Id
+	left join MeetingType mt on m.TypeId = mt.id
+	left join AgendaItemActionStatus s on a.StatusId = s.Id
+	left join WorkflowInst wi on a.WorkflowInstId = wi.Id
+	left join Workflow w on wi.WorkflowId = w.Id
+	inner join vwUserProfilePermissions upp on 
+	upp.PermissionId = 'module_actions'  
+	and ( upp.ProfileCompanyId = a.CompanyId or upp.ProfileCompanyId is null)
+	and upp.AccountDataId = @userId</value>
+  </data>
+  <data name="GetUserProfileUnits" xml:space="preserve">
+    <value>select u.Name, upu.UserProfileId from UserProfileUnit upu 
+inner join Unit u on upu.UnitId = u.Id</value>
+  </data>
+  <data name="GetAgendaItemInboxCountAll" xml:space="preserve">
+    <value>select  COUNT( distinct ai.Id) 
+	from 
+	AgendaItem ai 
+	left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+	left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+	left join Meeting m on m.Id = ma.MeetingId  
+	left join MeetingUrgency mu on mu.Id = m.UrgencyId
+	left join MeetingType mt on m.TypeId = mt.id
+	left join AgendaItemStatus ais on ai.StatusId = ais.Id
+	inner join AgendaItemType at on at.Id = ai.TypeId  and ai.TypeId not in (1,2,6,7)
+	inner join vwUserProfilePermissions upp on 
+	(upp.UnitId = aiu.UnitId or  upp.UnitId is null)
+	and upp.PermissionId = 'module_agenda_items'
+	and ( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+	and upp.AccountDataId = @userId</value>
+  </data>
+  <data name="GetAllAgendaItems" xml:space="preserve">
+    <value>select distinct 
+	agendaItem.Id,
+	agendaItem.MeetingId,
+	agendaItem.Title as Title,
+	agendaItem.MeetingNo as MeetingNo,
+	agendaItem.TypeId,
+	agendaItem.MeetingTypeName,
+	agendaItem.StatusName,
+	agendaItem.CreatedOn,
+	agendaItem.Comment as Comment,
+	agendaItem.MeetingUrgency,
+	agendaItem.AgendaItemTypeId,
+	agendaItem.ParentId,
+	agendaItem.ItemType,
+	agendaItem.UpdatedOn
+	from
+(select distinct ai.Id as Id,
+	m.Id as MeetingId,
+	ai.Title as Title,
+	m.MeetingNo as MeetingNo,
+	m.TypeId,
+	mt.Name as MeetingTypeName,
+	ais.[Name] as StatusName,
+	ai.CreatedOn as CreatedOn,
+	ai.Comment as Comment,
+	mu.Name as MeetingUrgency,
+	at.Id as AgendaItemTypeId,
+	ai.ParentId as ParentId,
+	at.Name as ItemType,
+	un.Name as UnitName,
+	ai.UpdatedOn
+	from 
+	AgendaItem ai 
+	left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+	left join  Unit un on un.Id = aiu.UnitId
+	left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+	left join Meeting m on m.Id = ma.MeetingId  
+	left join MeetingUrgency mu on mu.Id = m.UrgencyId
+	left join MeetingType mt on m.TypeId = mt.id
+	left join AgendaItemStatus ais on ai.StatusId = ais.Id
+	inner join AgendaItemType at on at.Id = ai.TypeId  and ai.TypeId not in (1,2,6,7)
+	inner join vwUserProfilePermissions upp on 
+	(upp.UnitId = aiu.UnitId or  upp.UnitId is null)  and upp.PermissionId = 'module_agenda_items' and ( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+	and upp.AccountDataId = @userid) agendaItem</value>
+  </data>
+  <data name="GetAgendaItemInboxCountAssigned" xml:space="preserve">
+    <value>select count(agendaItem.id)
+from
+(select  distinct ai.Id
+from AgendaItem ai
+left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId
+left join  Unit un on un.Id = aiu.UnitId
+inner join AgendaItemAssignment aia on ai.Id = aia.AgendaItemId
+left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+left join Meeting me on me.Id = ma.MeetingId  
+left join MeetingUrgency mu on mu.Id = me.UrgencyId
+left join MeetingType mt on me.TypeId = mt.id
+left join AgendaItemStatus ais on ai.StatusId = ais.Id
+inner join AgendaItemType at on at.Id = ai.TypeId  and ai.TypeId not in (1,2,6,7)
+
+inner join vwUserProfilePermissions upp on upp.ProfileId = aia.UserProfileId and
+(upp.UnitId = aiu.UnitId or  upp.UnitId is null)  and upp.PermissionId = 'module_agenda_items' and 
+( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+and upp.AccountDataId = @userId
+
+--union
+
+--select distinct ai.Id 
+--from AgendaItem ai
+--left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId
+--left join  Unit un on un.Id = aiu.UnitId
+--inner join AgendaItemAssignment aia on ai.Id = aia.AgendaItemId 
+--inner join UserProfile up on aia.UserProfileId = up.Id and up.Active = 1 
+--inner join UserDelegation del  on del.DelegateId = up.UserId and del.Active = 1  and 
+--(CONVERT(date, del.DelegateFromDate) &lt;= CONVERT(date, GETDATE()) and 
+--(CONVERT(date, del.DelegateToDate) &gt;= CONVERT(date, GETDATE())))
+--inner join dbo.[User] u on u.Id = up.UserId and u.AccountDataId = @userId
+--left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+--left join Meeting me on me.Id = ma.MeetingId  left join MeetingType mt on mt.Id = me.TypeId
+--left join MeetingGroup mg on me.GroupId = mg.id
+--left join AgendaItemStatus ais on ai.StatusId = ais.Id
+--left join AgendaItemType at on at.Id = ai.TypeId
+) agendaItem</value>
+  </data>
+  <data name="GetMeetingAgendaItems" xml:space="preserve">
+    <value>select distinct ai.Id as Id,
+	me.Id as MeetingId,
+	ai.Title as Title,
+	me.MeetingNo as MeetingNo,
+	me.TypeId, 
+	mt.Name as MeetingTypeName,
+	ais.[Name] as StatusName,
+	ai.CreatedOn as CreatedOn,
+	ai.Comment as Comment,
+	mu.Name as MeetingUrgency,
+	at.Id as AgendaItemTypeId,
+	ai.ParentId as ParentId,
+	ai.WorkflowInstId as WorkflowInstId,
+	wis.Id as ActiveStepId,
+	sb.EstimatedValueUSD as BudgetUsd,
+	sb.EstimatedValueUSD as BudgetAed,
+	ss.Subject as Subject,
+ai.DecisionComment as DecisionComment,
+	(SELECT
+	CASE 
+	WHEN ai.ParentId is null THEN CAST(ai.OrderNo AS nvarchar(50))
+	ELSE (select CAST(i.OrderNo as nvarchar(50)) from AgendaItem i where i.Id = ai.ParentId) + '.' + CAST(ai.OrderNo as nvarchar(50))
+	END) as OrderNo,
+ (select COUNT(*) from AgendaItemDocument aid where aid.AgendaItemId = ai.Id) as SlideCount 
+	from 
+	AgendaItem ai 
+	left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+	left join  Unit un on un.Id = aiu.UnitId
+	left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+	inner join Meeting me on me.Id = ma.MeetingId  and me.Id = @meetingId
+	left join MeetingUrgency mu on mu.Id = me.UrgencyId
+	left join MeetingType mt on me.TypeId = mt.id
+	left join AgendaItemStatus ais on ai.StatusId = ais.Id
+	left join AgendaItemType at on at.Id = ai.TypeId
+	left join SectionBudget sb on sb.AgendaItemId = ai.Id
+	left join SectionSubject ss on ss.AgendaItemId = ai.Id
+	left join WorkflowInstStep wis on ai.WorkflowInstId = wis.WorkflowInstId and wis.Active = 1
+	inner join vwUserProfilePermissions upp on 
+	(upp.UnitId = aiu.UnitId or  upp.UnitId is null )
+	and upp.PermissionId = 'module_agenda_items'
+	and ( upp.ProfileCompanyId = me.CompanyId or  upp.ProfileCompanyId is null)
+	and upp.AccountDataId = @userId</value>
+  </data>
+  <data name="GetAgendaItemsForPreviousMeeting" xml:space="preserve">
+    <value>select distinct ai.Id as Id,
+	me.Id as MeetingId,
+	ai.Title as Title,
+	me.MeetingNo as MeetingNo,
+	me.TypeId, 
+	mt.Name as MeetingTypeName,
+	ais.[Name] as StatusName,
+	ai.CreatedOn as CreatedOn,
+	ai.Comment as Comment,
+	mu.Name as MeetingUrgency,
+	at.Id as AgendaItemTypeId,
+	ai.ParentId as ParentId,
+	(SELECT
+	CASE 
+	WHEN ai.ParentId is null THEN CAST(ai.OrderNo AS nvarchar(50))
+	ELSE (select CAST(i.OrderNo as nvarchar(50)) from AgendaItem i where i.Id = ai.ParentId) + '.' + CAST(ai.OrderNo as nvarchar(50))
+	END) as OrderNo 
+	from 
+	AgendaItem ai 
+	left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+	left join  Unit un on un.Id = aiu.UnitId
+	left join MeetingAgenda ma on ma.agendaItemId = ai.id 
+	inner join Meeting me on me.PreviousMeetingId = ma.MeetingId  and me.Id = @meetingId
+	left join MeetingUrgency mu on mu.Id = me.UrgencyId
+	left join MeetingType mt on me.TypeId = mt.id
+	left join AgendaItemStatus ais on ai.StatusId = ais.Id
+	left join AgendaItemType at on at.Id = ai.TypeId
+	inner join vwUserProfilePermissions upp on 
+	(upp.UnitId = aiu.UnitId or  upp.UnitId is null )
+	and upp.PermissionId = 'module_agenda_items'
+	and ( upp.ProfileCompanyId = me.CompanyId or  upp.ProfileCompanyId is null)
+	and upp.AccountDataId = @userId</value>
+  </data>
+  <data name="CanSeeAgendaItem" xml:space="preserve">
+    <value>select CAST(CASE WHEN Count(distinct ai.Id) &gt; 0 THEN 1  ELSE 0   END as BIT)
+	from 
+	AgendaItem ai 
+	left join AgendaItemUnit aiu on ai.Id = aiu.AgendaItemId 
+	left join  Unit un on un.Id = aiu.UnitId
+	left join AgendaItemStatus ais on ai.StatusId = ais.Id
+	left join AgendaItemType at on at.Id = ai.TypeId
+	inner join vwUserProfilePermissions upp on 
+	(upp.UnitId = aiu.UnitId or  upp.UnitId is null) 
+	and upp.PermissionId = 'module_agenda_items'
+	and ( upp.ProfileCompanyId = ai.CompanyId or  upp.ProfileCompanyId is null)
+	and upp.AccountDataId = @userId 
+	where ai.Id = @agendaItemId</value>
+  </data>
+  <data name="CanSeeMeeting" xml:space="preserve">
+    <value>select  CAST(CASE WHEN Count( distinct meeting.Id) &gt; 0 THEN 1  ELSE 0   END as BIT)
+	from 
+(select distinct m.Id as Id, 
+	m.MeetingNo as MeetingNo,
+	m.Venue as Venue,
+	m.[Date] as [Date],
+	m.StartTime as StartTime,
+	m.EndTime as EndTime,
+                   m.TypeId as TypeId,
+	ms.[Name] as StatusName 
+	from Meeting m
+	left join MeetingStatus ms on m.StatusId = ms.Id
+	inner join vwUserProfilePermissions upp on 
+	(( upp.ProfileCompanyId = m.CompanyId or  upp.ProfileCompanyId is null) and upp.PermissionId = @meetingType) 
+	and upp.AccountDataId = @userId) meeting where meeting.Id = @meetingId and meeting.TypeId = @typeId</value>
+  </data>
+  <data name="GetUserPermissions" xml:space="preserve">
+    <value>select PermissionId, ProfileId, ProfileCompanyId as CompanyId, UnitId RoleId, UnitId, Condition  from vwUserProfilePermissions p where p.AccountDataId = @userId</value>
+  </data>
+</root>
